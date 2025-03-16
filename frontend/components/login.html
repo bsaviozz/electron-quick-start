@@ -5,14 +5,16 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./styles.css" rel="stylesheet">
-    <title>Secure Cloud App</title>
+    <title>Secure Cloud App - log in</title>
   </head>
   <body>
-    <h1>Secure Cloud App</h1>
-    <div class="enter-box">
-      <button><a href="./components/register.html">Register</a></button>
-      <button><a href="./components/login.html">Log In</a></button>
-    </div>
-    <script src="./renderer.js"></script>
+    <h1>Log in</h1>
+    <form action="../renderer.js" id="loginForm">
+        <label for="userId">ID:</label>
+        <input type="password" id="userId" name="userID"><br><br>
+        <input type="submit" value="Log In">
+    </form>
+
+    <script src="../renderer.js"></script>
   </body>
 </html>
