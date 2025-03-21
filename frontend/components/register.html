@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./styles.css" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <link href="../styles.css" rel="stylesheet">
     <title>Secure Cloud App - registration</title>
   </head>
   <body>
     <h1>Register</h1>
-    <form action="../renderer.js" id="registerForm">
+    <div class="form-box">
+      <form id="registerForm">
         <label for="fname">First name:</label>
         <input type="text" id="fname" name="fname"><br><br>
         <label for="lname">Last name:</label>
@@ -17,8 +18,8 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email"><br><br>
         <input type="submit" value="Register">
-    </form>
-
+      </form>
+    </div>
     <script src="../renderer.js"></script>
   </body>
 </html>

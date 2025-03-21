@@ -1,43 +1,59 @@
-// Handle Login Form Submission
-document.getElementById("loginFormData").addEventListener("submit", async (event) => {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("renderer.js is loaded and DOM is ready!");
 
-    const userId = document.getElementById("userId").value;
+    // Handle Registration
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+        console.log("Register form found. Attaching event listener.");
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-    try {
-        const response = await window.electronAPI.loginUser(userId);
-        if (response.success) {
-            alert(`User ${response.userId} logged in!`);
-            window.location.href = "dashboard.html"; // Redirect to another page
-        } else {
-            alert("Invalid User ID!");
-        }
-    } catch (error) {
-        console.error("Login failed:", error);
-        alert("Error during login.");
+            const userData = {
+                fname: document.getElementById("fname")?.value || "",
+                lname: document.getElementById("lname")?.value || "",
+                email: document.getElementById("email")?.value || ""
+            };
+
+            try {
+                const response = await window.electronAPI.registerUser(userData);
+                if (response.success) {
+                    alert(`This is your user ID: ${response.userId}. Remember it to log in`);
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Registration failed.");
+                }
+            } catch (error) {
+                console.error("Registration failed:", error);
+                alert("Error during registration.");
+            }
+        });
+    } else {
+        console.log("Register form not found on this page.");
     }
-});
 
-// Handle Register Form Submission
-document.getElementById("registerFormData").addEventListener("submit", async (event) => {
-    event.preventDefault();
+    // Handle Login
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        console.log("Login form found. Attaching event listener.");
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Prevent the form from reloading the page
 
-    const userData = {
-        fname: document.getElementById("fname").value,
-        lname: document.getElementById("lname").value,
-        email: document.getElementById("email").value
-    };
+            const userId = document.getElementById("userId")?.value || "";
 
-    try {
-        const response = await window.electronAPI.registerUser(userData, 'register');
-        if (response.success) {
-            alert(`User ${response.userId} registered successfully!`);
-            window.location.href = "dashboard.html"; // Redirect to another page
-        } else {
-            alert("Registration failed.");
-        }
-    } catch (error) {
-        console.error("Registration failed:", error);
-        alert("Error during registration.");
+            try {
+                const response = await window.electronAPI.loginUser(userId);
+                if (response.success) {
+                    alert(`User ${response.userId} logged in!`);
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Invalid User ID!");
+                }
+            } catch (error) {
+                console.error("Login failed:", error);
+                alert("Error during login.");
+            }
+        });
+    } else {
+        console.log("Login form not found on this page.");
     }
 });

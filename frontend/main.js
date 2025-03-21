@@ -12,7 +12,8 @@ function createWindow () {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,  // Prevent direct Node.js access
-      contextIsolation: true   // Required for security
+      contextIsolation: true,   // Required for security
+      enableRemoteModule: false
     }
   })
 
